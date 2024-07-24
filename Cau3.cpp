@@ -154,6 +154,136 @@ void xuatPhanTuCucTieu(int a[][MAX], int m, int n) {
 	}
 	printf("\n");
 }
+void swap(int& a, int& b)
+{
+	int x = a;
+	a = b;
+	b = x;
+}
+void sapXepTangDanTrenDong(int a[][MAX], int m, int n, int dong)
+{
+	for (int i = 0; i < n - 1; i++)
+	{
+		for (int j = 0; j < n - i - 1; j++)
+		{
+			if (a[dong][j] > a[dong][j + 1])
+				swap(a[dong][j], a[dong][j + 1]);
+		}
+	}
+}
+void sapXepGiamDanTrenDong(int a[][MAX], int m, int n, int dong)
+{
+	for (int i = 0; i < n - 1; i++)
+	{
+		for (int j = 0; j < n - i - 1; j++)
+		{
+			if (a[dong][j] < a[dong][j + 1])
+				swap(a[dong][j], a[dong][j + 1]);
+		}
+	}
+}
+void sapXepTangDanTrenCot(int a[][MAX], int m, int n, int cot)
+{
+	for (int i = 0; i < m - 1; i++)
+	{
+		for (int j = 0; j < m - i - 1; j++)
+		{
+			if (a[j][cot] > a[j+1][cot])
+				swap(a[j][cot],a[j + 1][cot]);
+		}
+	}
+}
+void sapXepGiamDanTrenCot(int a[][MAX], int m, int n, int cot)
+{
+	for (int i = 0; i < m - 1; i++)
+	{
+		for (int j = 0; j < m - i - 1; j++)
+		{
+			if (a[j][cot] < a[j + 1][cot])
+				swap(a[j][cot], a[j + 1][cot]);
+		}
+	}
+}
+
+void cau5(int a[][MAX], int m, int n)
+{
+	for (int i = 0; i < m; i++)
+	{
+		if (i % 2 == 0)
+		{
+			sapXepGiamDanTrenDong(a, m, n, i);
+		}
+		else
+			sapXepTangDanTrenDong(a, m, n, i);
+	}
+}
+void cau6(int a[][MAX], int m, int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		if (i % 2 == 0)
+		{
+			sapXepTangDanTrenCot(a, m, n, i);
+		}
+		else
+		{
+			sapXepGiamDanTrenCot(a, m, n, i);
+		}
+	}
+}
+bool kiemTraDongGiamDan(int a[][MAX], int m, int n,int dong) {
+	for (int j = 0; j < n - 1; j++) {
+		if (a[dong][j] < a[dong][j + 1]) {
+			return false;
+		}
+	}
+	return true;
+}
+
+
+bool kiemTraCotGiamDan(int a[][MAX], int n, int m,int cot) {
+	for (int i = 0; i <  - 1; i++) {
+		if (a[i][cot] < a[i + 1][cot]) {
+			return false;
+		}
+	}
+	return true;
+}
+
+bool cau7(int a[][MAX], int m, int n) {
+	for (int i = 0; i < m; i++) {
+		if (!kiemTraDongGiamDan(a,m,n,i)) {
+			return false;
+		}
+	}
+	for (int j = 0; j < n; j++) {
+		if (!kiemTraCotGiamDan(a,m,n,j)) {
+			return false;
+		}
+	}
+	return true;
+}
+bool dongChiChuaSoChan(int a[][MAX], int m, int n, int dong)
+{
+	for (int i = 0; i < n; i++)
+	{
+		if (a[dong][i] % 2 != 0)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+void cau8(int a[][MAX], int m, int n)
+{
+	printf("dong chi chua so chan la: ");
+	for (int i = 0; i < m; i++)
+	{
+		if (dongChiChuaSoChan(a, m, n, i))
+			printf("%d ", i);
+	}
+}
 int main()
 {
 
@@ -163,5 +293,12 @@ int main()
 	xuatMang2C_SoNguyen(a, m, n);
 	//xuatCacPhanTuBien(a, m, n);
 	//printf("so phan tu co chua chu so 2: %d", demSoPhanTuCoSo2(a, m, n));
-	xuatPhanTuCucTieu(a, m, n);
+	//xuatPhanTuCucTieu(a, m, n);
+	//cau6(a, m, n);
+	//printf("**************************\n");
+	//if(cau7(a,m,n))
+		//printf("ma tran giam dan");
+	//else
+		//printf("ma tran khong giam dan");
+	cau8(a, m, n);
 }
