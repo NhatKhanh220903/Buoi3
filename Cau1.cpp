@@ -188,26 +188,54 @@ void showMenu()
 	printf("\n*  7.Xuat dong chi chua so chan                       *");
 	printf("\n*  8.Xap xep mang tang dan theo tung dong             *");
 	printf("\n*  0.Thoat chuong trinh                               *");
+	printf("\n*******************************************************");
+}
+void process()
+{
+	int a[MAX][MAX], m, n,luachon;
+	do {
+		showMenu();
+		printf("\n hay lua chon chuc nang: ");
+		scanf("%d", &luachon);
+		switch (luachon)
+		{
+		case 1:
+			taoMang2C_SoNguyen(a, m, n);
+			break;
+		case 2:
+			xuatMang2C_SoNguyen(a, m, n);
+			break;
+		case 3:
+			tinhTongTungDong(a, m, n);
+			break;
+		case 4:
+			timPhanTuLonNhatTrenTungCot(a, m, n);
+			break;
+		case 5:
+			xuatCacPhanTuBien(a, m, n);
+			break;
+		case 6:
+			xuatPhanTuCucDai(a, m, n);
+			break;
+		case 7:
+			for (int i = 0; i < m; i++)
+			{
+				if (dongChiChuaSoChan(a, m, n, i))
+					printf("dong %d chi chua so chan\n", i);
+				else
+					printf("dong %d co so le\n", i);
+			}
+			break;
+		case 8:
+			sapXepTangDanTrenMang(a, m, n);
+			break;
+		default:
+			printf("Chon sai chuc nang trong chuong trinh");
+			break;
+		}
+	} while (luachon != 0);
 }
 int main()
 {
-	int a[MAX][MAX], m, n;
-	taoMang2C_SoNguyen(a, m, n);
-	xuatMang2C_SoNguyen(a, m, n);
-	//printf("tonhg dong la: %d", tinhTong1Dong(a, m, n, 1));
-	//tinhTongTungDong(a, m, n);
-	//timPhanTuLonNhatTrenTungCot(a, m, n);
-	//xuatCacPhanTuBien(a, m, n);
-	//xuatPhanTuCucDai(a, m, n);
-	/*for (int i = 0; i < m; i++)
-	{
-		if (dongChiChuaSoChan(a, m, n, i))
-			printf("dong %d chi chua so chan\n", i);
-		else
-			printf("dong %d co so le\n", i);
-	}*/
-	//sapXepTangDanTrenDong(a, m, n, 1);
-	sapXepTangDanTrenMang(a, m, n);
-	printf("mang da sap xep: \n");
-	xuatMang2C_SoNguyen(a, m, n);
+	process();
 }
