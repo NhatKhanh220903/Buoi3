@@ -274,7 +274,7 @@ bool dongChiChuaSoChan(int a[][MAX], int m, int n, int dong)
 	}
 	return true;
 }
-
+		
 void cau8(int a[][MAX], int m, int n)
 {
 	printf("dong chi chua so chan la: ");
@@ -282,6 +282,79 @@ void cau8(int a[][MAX], int m, int n)
 	{
 		if (dongChiChuaSoChan(a, m, n, i))
 			printf("%d ", i);
+	}
+}
+
+void cau9(int a[][MAX], int m, int n)
+{
+	printf("dong chi chua cac gia tri giam dan la: ");
+	for (int i = 0; i < m; i++)
+	{
+		if (kiemTraDongGiamDan(a, m, n, i))
+			printf("%d ", i);
+	}
+}
+
+int timMax(int a[][MAX], int m, int n)
+{
+	int max = a[0][0];
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			if (max < a[i][j])
+				max = a[i][j];
+		}
+	}
+	return max;
+}
+int timMin(int a[][MAX], int m, int n)
+{
+	int min = a[0][0];
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			if (min > a[i][j])
+				min = a[i][j];
+		}
+	}
+	return min;
+}
+
+void cau10(int a[][MAX], int m, int n)
+{
+	int max = timMax(a,m,n);
+	int min = timMin(a, m, n);
+	int range = max - min + 1;
+	int frequency[10000];
+	for (int i = 0; i < range; i++)
+	{
+		frequency[i] = 0;
+	}
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			frequency[a[i][j]-min]++;
+		}
+	}
+	for (int i = 0; i < range; i++)
+	{
+		if (frequency[i]>0)
+			printf("%d xuat hien %d lan\n", i+min, frequency[i]);
+	}
+	int maxFrequency = 0;
+	for (int i = 0; i < range; i++)
+	{
+		if (frequency[i] > maxFrequency)
+			maxFrequency = frequency[i];
+	}
+	printf("Cac gia tri xuat hien nhieu nhat la:\n");
+	for (int i = 0; i < range; i++) {
+		if (frequency[i] == maxFrequency) {
+			printf("%d xu?t hi?n %d l?n\n", i + min, maxFrequency);
+		}
 	}
 }
 int main()
@@ -300,5 +373,5 @@ int main()
 		//printf("ma tran giam dan");
 	//else
 		//printf("ma tran khong giam dan");
-	cau8(a, m, n);
+	cau10(a, m, n);
 }
