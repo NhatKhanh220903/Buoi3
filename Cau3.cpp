@@ -353,9 +353,103 @@ void cau10(int a[][MAX], int m, int n)
 	printf("Cac gia tri xuat hien nhieu nhat la:\n");
 	for (int i = 0; i < range; i++) {
 		if (frequency[i] == maxFrequency) {
-			printf("%d xu?t hi?n %d l?n\n", i + min, maxFrequency);
+			printf("%d xuat hien %d lan\n", i + min, maxFrequency);
 		}
 	}
+}
+void cau11(int a[][MAX], int m, int n)
+{
+	int frequency[10] = {0};
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			int num = abs(a[i][j]);
+			while (num != 0)
+			{
+				int x = num % 10;
+				frequency[x]++;
+				num /= 10;
+			}
+		}
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		if (frequency[i] > 0)
+			printf("%d xuat hien %d lan\n", i, frequency[i]);
+	}
+	int maxFrequency = 0;
+	for (int i = 0; i < 10; i++)
+	{
+		if (frequency[i] > maxFrequency)
+			maxFrequency = frequency[i];
+	}
+	printf("Cac gia tri xuat hien nhieu nhat la:\n");
+	for (int i = 0; i < 10; i++) {
+		if (frequency[i] == maxFrequency) {
+			printf("%d xuat hien %d lan\n", i, maxFrequency);
+		}
+	}
+}
+int tinhTong1Cot(int a[][MAX], int m, int n, int cot)
+{
+	int tong = 0;
+	for (int i = 0; i < m; i++)
+	{
+		tong += a[i][cot];
+	}
+	return tong;
+}
+void tinhTongTungCot(int a[][MAX], int m, int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		printf("Tong cot %d la: %d\n", i, tinhTong1Cot(a, m, n, i));
+	}
+}
+void cau12(int a[][MAX], int m, int n)
+{
+	int minCol =tinhTong1Cot(a,m,n,0) ;
+	for (int i = 1; i < n; i++) {
+		int sumCol = tinhTong1Cot(a, m, n, i);
+		if ( sumCol< minCol) {
+			minCol =sumCol;
+		}
+	}
+	printf("Cot co tong nho nhat la: %d",minCol);
+}
+
+void cau13(int a[][MAX], int m,int n)
+{
+	int i, j;
+	do {
+		printf("Moi ban nhap vao 2 cot can hoan lon hon 0 va be hon %d\n", n);
+		printf("Moi nhap cot thu nhat: ");
+		scanf("%d", &i);
+		printf("Moi nhap cot thu hai: ");
+		scanf("%d", &j);
+	} while (i<0 || i>=n || j<0 || j>=n);
+	for (int k = 0; k < m; k++)
+	{
+		swap(a[k][i], a[k][j]);
+	}
+	xuatMang2C_SoNguyen(a, m, n);
+}
+void cau14(int a[][MAX], int m, int n)
+{
+	int k, l;
+	do {
+		printf("Moi ban nhap vao 2 dong can hoan lon hon 0 va be hon %d\n", m);
+		printf("Moi nhap dong thu nhat: ");
+		scanf("%d", &k);
+		printf("Moi nhap dong thu hai: ");
+		scanf("%d", &l);
+	} while (k < 0 || k >= n || l < 0 || l >= n);
+	for (int i = 0; i < n; i++)
+	{
+		swap(a[k][i], a[l][i]);
+	}
+	xuatMang2C_SoNguyen(a, m, n);
 }
 int main()
 {
@@ -373,5 +467,5 @@ int main()
 		//printf("ma tran giam dan");
 	//else
 		//printf("ma tran khong giam dan");
-	cau10(a, m, n);
+	cau14(a, m, n);
 }
