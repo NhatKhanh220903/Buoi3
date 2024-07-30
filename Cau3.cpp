@@ -458,14 +458,4 @@ int main()
 	int a[MAX][MAX], m, n, luachon;
 	taoMang2C_SoNguyen(a, m, n);
 	xuatMang2C_SoNguyen(a, m, n);
-	//xuatCacPhanTuBien(a, m, n);
-	//printf("so phan tu co chua chu so 2: %d", demSoPhanTuCoSo2(a, m, n));
-	//xuatPhanTuCucTieu(a, m, n);
-	//cau6(a, m, n);
-	//printf("**************************\n");
-	//if(cau7(a,m,n))
-		//printf("ma tran giam dan");
-	//else
-		//printf("ma tran khong giam dan");
-	cau14(a, m, n);
 }
